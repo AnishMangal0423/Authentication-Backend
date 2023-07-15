@@ -1,24 +1,29 @@
 'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-   
-    await queryInterface.createTable('Airplanes', {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      modelNumber: {
-        allowNull:false,
+      email: {
         type: Sequelize.STRING,
-       
+        allowNull:false,
+        unique:true,
+        validate:{
+          isEmail:true
+        }
       },
-      capacity: {
-        type: Sequelize.INTEGER,
-        defaultValue:0,
+      password: {
+        type: Sequelize.STRING,
+        allowNull:false,
+        validate:{
+  
+          len:[3 , 50]
+        }
       },
       createdAt: {
         allowNull: false,
@@ -30,10 +35,7 @@ module.exports = {
       }
     });
   },
-
-  async down (queryInterface, Sequelize) {
-   
-
-    await queryInterface.dropTable('Airplanes');
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('Users');
   }
 };
