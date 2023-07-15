@@ -4,7 +4,7 @@ const express=require('express');
 
 module.exports={
 
-    Info:info,
+    Info:require('./Info-controller.js'),
     makeAirplane:require('./airplane_controller.js'),
     makeUser:require('./user-controller.js')
 

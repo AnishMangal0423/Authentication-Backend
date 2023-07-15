@@ -1,9 +1,7 @@
 const { user_Service } = require("../services");
 const { Error_Res, Correct_Res } = require("../utils/common");
 const correct_res = require("../utils/common/correct_response");
-
-
-const{statuscode}=require('http-status-codes')
+const { StatusCodes } = require("http-Status-Codes");
 /***
  * Post - : /signup
  * req-body {email :'aa@gmail.com , password : '1234'}

@@ -65,9 +65,9 @@ async function signin(data){
             StatusCodes.BAD_REQUEST
           );    
      }
-     console.log("tokenb")
+    //  console.log("tokenb")
   const token= Auth.createToken({id:user.id , email:user.email})
-  console.log("tokena")
+//   console.log("tokena")
    return token;
 }
  catch(error){
@@ -80,30 +80,39 @@ async function signin(data){
 
 
 
+async function isAuthenticated(token){
 
-async function checkPassword(plainPassword , encryptedPassword){
+try {
 
-    try {
-        return bcrypt.compareSync(plainPassword , encryptedPassword)
-
-    } catch (error) {
-        
-        throw error;
+    if(!token){
+        throw new AppError('User dont have JWT Token' , StatusCodes.BAD_REQUEST);
     }
+   const response=Auth.verifyToken(token);
+const user = await userRepository.get(response.id);
+
+if(!user){
+
+    throw new AppError('No User Found', StatusCodes.NOT_FOUND)
+}
+
+return user.id;
+} catch (error) {
+    
+    if(error.name== 'JsonWebTokenError'){
+
+        throw new AppError('Invald JWT token' , StatusCodes.BAD_REQUEST);
+    }
+
+    throw error;
+
+}
+
 }
 
 
-async function createToken(input){
-
-    try {
-        
-   return jwt.sign(input , ServerConfig.JWT_SECRET , {expiresId: ServerConfig.JWT_EXPIRY})
-    } catch (error) {
-        
-    }
-}
 module.exports={
 
     createUser,
-    signin
+    signin,
+    isAuthenticated
 }
