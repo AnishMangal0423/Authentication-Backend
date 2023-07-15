@@ -13,7 +13,8 @@ class CrudRepository {
       const response = await this.model.create(data);
       return response;
     } catch (error) {
-      console.log("error in airplane repository");
+      console.log(error)
+      console.log("error in create  repository fn ");
       throw error;
     }
   }

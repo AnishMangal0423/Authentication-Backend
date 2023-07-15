@@ -15,7 +15,7 @@ async function createUser(data) {
 
     return user;
   } catch (error) {
-    console.log("There is some error in airplane create service ");
+    console.log("There is some error in user create service ");
 
     if (error.name == "SequelizeValidationError" || error.name== 'SequelizeUniqueConstraintError') {
       let explanation = [];

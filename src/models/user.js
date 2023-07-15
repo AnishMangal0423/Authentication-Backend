@@ -2,6 +2,10 @@
 const {
   Model
 } = require('sequelize');
+const bcrypt = require('bcrypt');
+const { use } = require('../routes/v1');
+const{Server_config}=require('../config')
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -36,5 +40,23 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
+
+
+
+ /***
+  * Now for the authenication and hiding password i am using bcrypt triging
+  *  in normal js file level
+  * 
+  */
+
+ User.beforeCreate(function encrypt(user){
+   console.log("Before encyption", user.password)
+  const encryptedPassword = bcrypt.hashSync(user.password ,+Server_config.SALT_ROUNDS);
+
+  user.password=encryptedPassword
+  console.log("after encyption", user.password)
+  
+ })
+
   return User;
 };

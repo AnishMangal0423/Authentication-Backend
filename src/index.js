@@ -1,5 +1,6 @@
 const express = require("express");
-const { PORT } = require("./config");
+// const { PORT } = require("./config");
+const {Server_config}=require('./config')
 const mountRoutes = require("./routes");
 
 const app = express();
@@ -10,6 +11,8 @@ app.get("/", (req, res) => {
     fg: "Pranu Bhandari",
   });
 });
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -18,8 +21,8 @@ app.use("/api", mountRoutes);
 
 
 
-app.listen(PORT, function exec() {
-  console.log(`Starting My server at Port ${PORT}`);
+app.listen(5001, function exec() {
+  console.log(`Starting My server at Port ${5001}`);
 
 });
 
