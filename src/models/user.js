@@ -50,13 +50,13 @@ module.exports = (sequelize, DataTypes) => {
   */
 
  User.beforeCreate(function encrypt(user){
-   console.log("Before encyption", user.password)
+  //  console.log("Before encyption", user.password)
   const encryptedPassword = bcrypt.hashSync(user.password ,+Server_config.SALT_ROUNDS);
 
   user.password=encryptedPassword
-  console.log("after encyption", user.password)
+  // console.log("after encyption", user.password)
   
  })
 
   return User;
-};
+}; 

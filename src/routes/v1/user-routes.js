@@ -1,4 +1,4 @@
-const {makeUser}=require('../../controllers');
+const {  makeUser}=require('../../controllers');
 // const {ModelNumber}=require('../../middlewares');
 const express=require('express');
 
@@ -6,7 +6,8 @@ const express=require('express');
 const router=express.Router();
 
 
-router.post('/' ,  makeUser.MakeUser);
+router.post('/signup' ,  makeUser.MakeUser);
+router.post('/signin' ,makeUser.signin)
 
 
 
