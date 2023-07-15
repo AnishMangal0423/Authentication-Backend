@@ -6,5 +6,6 @@ module.exports={
 
     Info:info,
     makeAirplane:require('./airplane_controller.js'),
+    makeUser:require('./user-controller.js')
 
 }
